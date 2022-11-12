@@ -1,0 +1,139 @@
+package IneuroN_;
+import java.util.*;
+
+
+/*		
+  		1) This is a guesser Game
+ 	    2) This game can be played by any number of players.
+ 	    3) This game also asks the player their names , and then provide with the results accordingly.
+ 	    4) This game also features a tie-Breaker ie If any 2 players have Won The game then they get a chance
+ 	    	to compete with one another and finally decide a winner.
+  */
+
+class player
+{
+	int noOfPlayers;
+	Scanner s = new Scanner(System.in);
+	public player(int noOfPlayers)
+	{
+		this.noOfPlayers = noOfPlayers;
+	}
+	public int[] getPlayersGuess()
+	{
+		int arr[] = new int[noOfPlayers];
+		for(int i=0;i<noOfPlayers;i++)
+		{
+			System.out.println("Player "+(i+1)+" Enter your Guess :");
+			arr[i] = s.nextInt();
+		}
+		return arr;
+	}
+	public String[] getPlayersNames()
+	{
+		String array[] = new String[noOfPlayers];
+		for(int i=0;i<noOfPlayers;i++)
+		{
+			System.out.println("Player "+(i+1)+" Enter your Name :");
+			array[i] = s.nextLine();
+		}
+		return array;		
+	}	
+}
+
+class Guesser
+{
+	Scanner s = new Scanner(System.in);
+	int guesserGuessNum;
+	int getGuesserGuess()
+	{
+		System.out.println("Guesser please guess the number :");
+		guesserGuessNum = s.nextInt();
+		return guesserGuessNum;
+	}
+}
+
+
+
+public class GuesserGameProject
+{
+	
+	private int dataFromGuesser;
+	int[] playersGuess;
+	String[] playersNames;
+	static Scanner s = new Scanner(System.in);
+	public static void main(String[] args) 
+	{
+		int dataFromGuesser;
+		int[] playersGuess;
+		System.out.println("======================= Welcome To The Guesser's Game ========================");
+		System.out.println();
+		System.out.println("Want To Play The Game ? Enter 1 to Start or 0 otherwise");
+		int start = s.nextInt();
+		if(start!=1)
+		{
+			System.out.println("No Game Requested.........");
+		}
+		while(start==1)
+		{
+			GuesserGameProject g = new GuesserGameProject();
+			Guesser g1 = new Guesser();
+			g.dataFromGuesser = g1.getGuesserGuess();
+			
+		
+			System.out.println("Enter No Of Players ");
+			int noOfPlayers = s.nextInt();
+			player player = new player(noOfPlayers);
+			g.playersNames = player.getPlayersNames();
+			g.playersGuess = player.getPlayersGuess();
+			int a = g.compareResult();
+			System.out.println();	
+			if(a!=2)
+			{
+				System.out.println("Game Over......Well Played");
+			}
+			if(a==2)
+			{
+				System.out.println("There's A Tie Betweeen 2 Players");
+				System.out.println("Want a Special Tie Breaker for These 2 Players ?");
+				System.out.println("Enter 1 for Tie Breaker or 0 otherwise");
+				int ans = s.nextInt();
+				if(ans==1)
+				{
+					GuesserGameProject gue = new GuesserGameProject();
+					Guesser g2 = new Guesser();
+					gue.dataFromGuesser = g2.getGuesserGuess();					
+				
+					player players = new player(2);
+					g.playersNames = players.getPlayersNames();
+					g.playersGuess = players.getPlayersGuess();
+					g.compareResult();
+				}				
+			}
+			System.out.println("Game over.....");
+			System.out.println("Play Again ? Enter 1 to Play Again or 0 otherwise");
+			start = s.nextInt();
+			if(start!=1)
+			{
+				System.out.println("No Game Requested.........");
+			}
+		}
+		
+	}
+	public int compareResult() {
+	
+		int count=0;
+		for (int i = 0; i < playersGuess.length; i++) 
+		{
+			if (playersGuess[i] == dataFromGuesser) {
+				count++;
+				System.out.println(playersNames[i]+" won the match");
+			}
+		}		
+		if(count==0)
+		{
+			System.out.println("No One Won");
+		}
+		return count;
+	}
+	
+}

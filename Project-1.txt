@@ -1,9 +1,8 @@
-package IneuroN_;
 import java.util.*;
 
 
 /*		
-  		1) This is a guesser Game
+  	    1) This is a guesser Game
  	    2) This game can be played by any number of players.
  	    3) This game also asks the player their names , and then provide with the results accordingly.
  	    4) This game also features a tie-Breaker ie If any 2 players have Won The game then they get a chance
@@ -95,7 +94,7 @@ public class GuesserGameProject
 			{
 				System.out.println("There's A Tie Betweeen 2 Players");
 				System.out.println("Want a Special Tie Breaker for These 2 Players ?");
-				System.out.println("Enter 1 for Tie Breaker or 0 otherwise");
+				System.out.println("Enter 1 to Enter Tie Breaker or 0 otherwise");
 				int ans = s.nextInt();
 				if(ans==1)
 				{
@@ -107,8 +106,14 @@ public class GuesserGameProject
 					g.playersNames = players.getPlayersNames();
 					g.playersGuess = players.getPlayersGuess();
 					g.compareResult();
-				}				
+				}			
+                		else
+                		{
+                    		System.out.println();
+                    		System.out.println("No Game Requested.........");                    
+                		}	
 			}
+            		System.out.println();
 			System.out.println("Game over.....");
 			System.out.println("Play Again ? Enter 1 to Play Again or 0 otherwise");
 			start = s.nextInt();
@@ -119,7 +124,8 @@ public class GuesserGameProject
 		}
 		
 	}
-	public int compareResult() {
+	public int compareResult() 
+   	{
 	
 		int count=0;
 		for (int i = 0; i < playersGuess.length; i++) 
